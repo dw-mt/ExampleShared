@@ -1,14 +1,13 @@
-from subprocess import call
 from typing import Any
+from grpc_tools import protoc
 
 def build(setup_kwargs: dict[str, Any]):
     
-    protoc_command = [
-        "python", "-m", "grpc_tools.protoc",
+    protoc_args = [
         "-I=protocol",
-        "--python_out=protocol",
-        "--grpc_python_out=protocol",
+	    "--python_out=.",
+        "--grpc_python_out=.",
         "protocol/example.proto",
     ]
 
-    call(protoc_command)
+    protoc.main(protoc_args)
